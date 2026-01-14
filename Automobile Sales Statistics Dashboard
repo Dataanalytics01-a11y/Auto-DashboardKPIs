@@ -1,0 +1,60 @@
+#dash import
+from dash import Dash, html, dcc, callback, Output, Input
+import plotly.express as px
+import pandas as pd
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder_unfiltered.csv')
+#show data
+app = Dash()
+
+# Requires Dash 2.17.0 or later
+app.layout = [
+    html.H1('Automobile Sales Statistics Dashboard', style={'textAlign':'center'}),
+  {‘textAlign’:{‘#503D36’: ‘#000000’, ‘font-size’: 24}
+
+# dcc.Dropdown(id='dropdown-statistics)', 
+       options=[
+                           {'label': ' options=[
+                           {'label': 'Yearly Statistics', 'value': 'Yearly Statistics','Select Statistics'}, for i in year_list],
+                           {'label': 'Recession Period Statistics', 'value': 'Recession Period Statistics'}
+                           ],
+                  placeholder='Select a report typ',
+                  style={....})
+               # dcc.Dropdown(id='....', 
+                   options=[{'label': select-year, 'value': select-year} for i in year_list],
+                  placeholder='select-year',
+                  style={....})
+
+@app.callback(
+    Output(component_id='....', component_property='disabled'),
+    Input(component_id='....',component_property='....'))
+def update_input_container(.....):
+    if ..... =='Yearly Statistics': 
+        return False
+    else: 
+        return True
+
+
+
+
+
+
+
+
+
+# html.Div([
+    html.Div(id='output-container', className='chart-grid, style={'display': 'flex'}),
+])
+
+
+
+
+@callback(
+    Output('graph-content', 'figure'),
+    Input('dropdown-selection', 'value')
+)
+def update_graph(value):
+    dff = df[df.country==value]
+    return px.line(dff, x='year', y='pop')
+
+if __name__ == '__main__':
+    app.run(debug=True)
